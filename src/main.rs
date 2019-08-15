@@ -1,5 +1,6 @@
 use geo::prelude::*;
 use geo::Point;
+use std::cmp::Ordering::Equal;
 
 fn main() {
     let p = |x, y| Point::<f64>::from((x, y));
@@ -18,4 +19,6 @@ fn main() {
     }
 
     println!("{}", distances.iter().cloned().fold(0. / 0., f64::min));
+    distances.sort_by(|a, b| a.partial_cmp(b).unwrap_or(Equal));
+    println!("{:?}", distances);
 }
